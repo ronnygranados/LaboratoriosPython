@@ -107,7 +107,7 @@ if args.completa is True and args.tiempo is True:
             .format(fibonacci(i))
         )
     # luego lo del tiempo:
-        print(
-            'Tiempo total de ejecución: {} segundos.'
-            .format(timee)
-        )
+    print(
+        'Tiempo total de ejecución: {} segundos.'
+        .format(timee)
+    )
