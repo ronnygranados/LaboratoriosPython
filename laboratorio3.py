@@ -1,12 +1,15 @@
 #!/usr/bin/python3
+
 """
 - Ronny Granados Pérez
 
-El usuario deberá indicar un número entero positivo en la terminal que corresponderá
- a un índice posicional en la secuencia de fibonacci, el programa imprimirá el número
- correspondiente a esa posición. Además, de manera opcional podrá obtener el tiempo
- que le tomó al sistema procesar ese cálculo y/o imprimir la secesión completa hasta
- esa posición.
+El usuario deberá indicar un número entero positivo
+en la terminal que corresponderá a un índice
+posicional en la secuencia de fibonacci, el programa
+imprimirá el número correspondiente a esa posición.
+Además, de manera opcional podrá obtener el tiempo
+que le tomó al sistema procesar ese cálculo
+y/o imprimir la secesión completa hasta esa posición.
 
 """
 
@@ -36,18 +39,19 @@ parser.add_argument(
 
 # Obtengo los argumentos y los guardo en args
 args = parser.parse_args()
-
-# A partir de aca se empezara a contar el tiempo que dura en ejecutarse la funcion.
+# Cuenta el tiempo que dura en ejecutarse la funcion.
 start = time.time()
 
+
 def fibonacci(number):
-  if (number == 0 or number == 1):
-    solution = 1
-  elif (number < 0):
-    raise ValueError('Ingrese un valor entero positivo.')
-  else:
-    solution = fibonacci(number - 1) + fibonacci(number - 2)
-  return solution
+    if (number == 0 or number == 1):
+        solution = 1
+    elif (number < 0):
+        raise ValueError('Ingrese un valor entero positivo.')
+    else:
+        solution = fibonacci(number - 1) + fibonacci(number - 2)
+    return solution
+
 
 # Aca deja de tomar el tiempo y lo almacena en una variable
 end = time.time()
@@ -58,44 +62,52 @@ timee = end - start
 # condiciones para ejecutar en la terminal
 
 # si solo se le da el parametro obligatorio
-if (args.tiempo == False and args.completa == False):
-  print(
-    'El número de fibonacci ' 
-    'de índice {} es: {}'
-    .format(args.posicion,fibonacci(args.posicion))
-)
-
-# si se da el numero y se pide entregar la sucesion completa (-c, --completa)
-if (args.completa == True and args.tiempo == False):
-  lista = range(args.posicion+1)
-  print('La serie de Fibonacci hasta el índice {} es: '.format(args.posicion))
-  for i in lista:
-    print('{}'.format(fibonacci(i)))
-
-# si se da el numero y se pide entregar el tiempo de ejecucion (-t, --tiempo)
-if (args.tiempo == True and args.completa == False):
-  print(
-    'El número de fibonacci ' 
-    'de índice {} es: {}'
-    .format(args.posicion,fibonacci(args.posicion))
-)  
-  print(
-    'Tiempo total de ejecución: {}'
-    .format(timee)
-)
-
-# si se entregan tanto el numero como las dos opcionales (-c y -t o viceversa)
-if (args.completa == True and args.tiempo == True):
-# primero lo de la lista:
-  lista = range(args.posicion+1)
-  print('La serie de Fibonacci hasta el índice {} es: '.format(args.posicion))
-  for i in lista:
+if args.tiempo is False and args.completa is False:
     print(
-      '{}'
-      .format(fibonacci(i))
-)
-# luego lo del tiempo:
-  print(
-    'Tiempo total de ejecución: {} segundos.'
-    .format(timee)
-)
+        'El número de fibonacci '
+        'de índice {} es: {}'
+        .format(args.posicion, fibonacci(args.posicion))
+    )
+
+# se da el numero y se pide la sucesion completa (-c, --completa)
+if args.completa is True and args.tiempo is False:
+    lista = range(args.posicion+1)
+    print(
+        'La serie de Fibonacci'
+        ' hasta el índice {} es: '
+        .format(args.posicion)
+    )
+    for i in lista:
+        print('{}'.format(fibonacci(i)))
+
+# se da el numero y pide el tiempo (-t, --tiempo)
+if args.tiempo is True and args.completa is False:
+    print(
+        'El número de fibonacci '
+        'de índice {} es: {}'
+        .format(args.posicion, fibonacci(args.posicion))
+    )
+    print(
+        'Tiempo total de ejecución: {}'
+        .format(timee)
+    )
+
+# si se entregan el numero y -c y -t o viceversa
+if args.completa is True and args.tiempo is True:
+    # primero lo de la lista:
+    lista = range(args.posicion+1)
+    print(
+        'La serie de Fibonacci '
+        'hasta el índice {} es: '
+        .format(args.posicion)
+    )
+    for i in lista:
+        print(
+            '{}'
+            .format(fibonacci(i))
+        )
+    # luego lo del tiempo:
+        print(
+            'Tiempo total de ejecución: {} segundos.'
+            .format(timee)
+        )
